@@ -28,9 +28,9 @@ jobs:
           name: Deploy to Staging
           command: |
             apt-get update -qy |
-            && apt-get install -y ruby-dev |
-            && gem install dpl |
-            && dpl --provider=heroku --app=$HEROKU_APP_NAME_STG --api-key=$HEROKU_API_KEY
+            apt-get install -y ruby-dev |
+            gem install dpl |
+            dpl --provider=heroku --app=$HEROKU_APP_NAME_STG --api-key=$HEROKU_API_KEY
   deploy-prod:
     docker:
       - image: ruby
@@ -40,9 +40,9 @@ jobs:
           name: Deploy to Production
           command: |
             apt-get update -qy |
-            && apt-get install -y ruby-dev |
-            && gem install dpl |
-            && dpl --provider=heroku --app=$HEROKU_APP_NAME_PRD --api-key=$HEROKU_API_KEY
+            apt-get install -y ruby-dev |
+            gem install dpl |
+            dpl --provider=heroku --app=$HEROKU_APP_NAME_PRD --api-key=$HEROKU_API_KEY
 workflows:
   version: 2
   build-deploy:
