@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.7.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+    id 'jacoco'
 }
 
 group = 'com.atendo-em-libras'
@@ -19,6 +20,17 @@ dependencies {
 	}
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.3
+            }
+        }
+    }
+}
+
 test {
-	useJUnitPlatform()
+    finalizedBy jacocoTestCoverageVerification
+    useJUnitPlatform()
 }
