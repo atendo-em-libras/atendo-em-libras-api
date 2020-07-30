@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: Deploy to Staging
-          command: git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STG.git master
+          command: apt-get update -qy && gem install dpl && dpl --provider=heroku --app=$HEROKU_APP_NAME_STG --api-key=$HEROKU_API_KEY
   deploy-prod:
     docker:
       - image: buildpack-deps:trusty
