@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    echo
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
     working_directory: ~/repo
@@ -20,6 +21,8 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
       - run: gradle test
   deploy-staging:
+    docker:
+      - image: buildpack-deps:trusty
     steps:
       - checkout
       - run:
