@@ -2,7 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:14-jdk-buster
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+        environment:
+          spring_profiles_active: dev
     working_directory: ~/repo
     environment:
       JVM_OPTS: -Xmx3200m
@@ -32,7 +34,7 @@ jobs:
           name: Deploy to Production
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_PRD.git master
 workflows:
-  version: 2
+  version: 3
   build-deploy:
     jobs:
       - build
