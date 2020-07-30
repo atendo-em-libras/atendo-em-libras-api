@@ -29,6 +29,6 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - deploy-staging
+      - deploy-staging:
         requires:
           - build
