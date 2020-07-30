@@ -3,8 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
-        environment:
-          spring_profiles_active: dev
     working_directory: ~/repo
     environment:
       JVM_OPTS: -Xmx3200m
