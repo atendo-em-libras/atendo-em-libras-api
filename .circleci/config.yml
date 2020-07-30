@@ -40,8 +40,8 @@ workflows:
             - build
       - approve-deploy-prod:
           type: approval
-            requires:
-              - deploy-staging
+          requires:
+            - deploy-staging
       - deploy-prod:
           requires:
             - approve-deploy-prod
