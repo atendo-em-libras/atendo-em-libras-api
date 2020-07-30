@@ -24,6 +24,12 @@ jobs:
       - run:
           name: Deploy to Staging
           command: git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STG.git master
+  deploy-prod:
+  steps:
+    - checkout
+    - run:
+        name: Deploy to Production
+        command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_PRD.git master
 workflows:
   version: 2
   build-deploy:
@@ -32,3 +38,10 @@ workflows:
       - deploy-staging:
           requires:
             - build
+            - approve-deploy-prod:
+          type: approval
+          requires:
+            - deploy-staging
+      - deploy-prod:
+          requires:
+            - approve-deploy-prod
