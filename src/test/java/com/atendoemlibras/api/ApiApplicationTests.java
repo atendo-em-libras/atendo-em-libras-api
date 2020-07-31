@@ -1,6 +1,6 @@
 package com.atendoemlibras.api;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 class ApiApplicationTests {
 
