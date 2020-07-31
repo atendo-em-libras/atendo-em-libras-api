@@ -1,6 +1,6 @@
 spring:
   flyway:
-    locations: classpath:/db/migrations,classpath:/db/seeders
+    locations: classpath:/db/migrations
   datasource:
     url: jdbc:postgresql://localhost:5432/atendo_em_libras
     username: postgres
