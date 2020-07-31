@@ -13,7 +13,7 @@ brew install postgresql
 Feito isso, é necessário criar o banco de dados com o usuário postgres. Primeiro, entre no terminal do postgres usando seu usuário principal:
 
 ```
-sudo -u psql <nome-de-usuario> postgres
+sudo psql -U <nome-de-usuario> postgres
 ```
 
 Dentro do terminal do postgres, execute o comando:
@@ -22,3 +22,11 @@ Dentro do terminal do postgres, execute o comando:
 CREATE DATABASE atendo_em_libras OWNER postgres;
 ```
 
+## To start the API
+```
+./gradlew build
+```
+
+```
+./gradlew bootrun
+```
