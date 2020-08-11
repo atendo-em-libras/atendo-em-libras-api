@@ -12,6 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name="professionals")
 public class Professional {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
