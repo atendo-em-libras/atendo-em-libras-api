@@ -5,6 +5,7 @@ import com.atendoemlibras.api.repository.ProfessionalRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfessionalService {
@@ -15,19 +16,19 @@ public class ProfessionalService {
     }
 
     public List<Professional> getAll() {
-        return repository.getAll();
+        return (List<Professional>) repository.findAll();
     }
 
-    public Professional getOneProfessional(int index) {
-        return getAll().get(index);
+    public Optional<Professional> getOneProfessional(long index) {
+        return repository.findById(index);
     }
 
     public void addProfessional(Professional professional) {
-        repository.addProfessional(professional);
+        repository.save(professional);
     }
 
-    public void deleteProfessional (int index) {
-        repository.deleteProfessional(index);
+    public void deleteProfessional (long index) {
+        repository.deleteById(index);
     }
 
 }

@@ -5,6 +5,7 @@ import com.atendoemlibras.api.service.ProfessionalService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/professionals")
@@ -21,7 +22,7 @@ public class ProfessionalController {
     }
 
     @GetMapping(path = "/{index}")
-    public Professional getOneProfessional(@PathVariable("index") int index) {
+    public Optional<Professional> getOneProfessional(@PathVariable("index") int index) {
         return service.getOneProfessional(index);
     }
 
