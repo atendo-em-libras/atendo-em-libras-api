@@ -1,0 +1,10 @@
+ALTER TABLE professionals ADD COLUMN biography varchar;
+ALTER TABLE professionals ADD COLUMN category varchar;
+ALTER TABLE professionals ADD COLUMN speciality varchar;
+ALTER TABLE professionals ADD COLUMN register_number varchar;
+ALTER TABLE professionals ADD COLUMN health_insurance varchar;
+ALTER TABLE professionals ADD COLUMN is_referred boolean DEFAULT FALSE;
+ALTER TABLE professionals ADD COLUMN terms_and_conditions boolean DEFAULT FALSE;
+ALTER TABLE professionals ADD COLUMN admin_approved boolean DEFAULT FALSE;
+ALTER TABLE professionals ADD COLUMN email varchar;
+ALTER TABLE professionals ADD COLUMN phone varchar;

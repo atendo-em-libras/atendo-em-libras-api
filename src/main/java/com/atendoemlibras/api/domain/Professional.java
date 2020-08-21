@@ -1,16 +1,15 @@
 package com.atendoemlibras.api.domain;
 
+import com.atendoemlibras.api.enums.CategoryEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name="professionals")
+@Table(name = "professionals")
 public class Professional {
 
     @Id
@@ -18,21 +17,57 @@ public class Professional {
     private Long id;
 
     private String name;
+    private String biography;
+    private CategoryEnum category;
+    private String speciality;
+
+    @Column(name = "register_number")
+    private String registerNumber;
+
+    @Column(name = "health_insurance")
+    private String healthInsurance;
+
+    @Column(name = "is_referred")
+    private boolean isReferred;
+
+    @Column(name = "terms_and_conditions")
+    private boolean termsAndCoditions;
+
+    @Column(name = "admin_approved")
+    private boolean adminApproved;
+
+    private String email;
+    private String phone;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "attendance_id", referencedColumnName = "id")
+    private Attendance attendance;
 
     @JsonCreator
-    public Professional(@JsonProperty("name") String name) {
+    public Professional(@JsonProperty("name") String name,
+                        @JsonProperty("biography") String biography,
+                        @JsonProperty("category") CategoryEnum category,
+                        @JsonProperty("speciality") String speciality,
+                        @JsonProperty("registerNumber") String registerNumber,
+                        @JsonProperty("healthInsurance") String healthInsurance,
+                        @JsonProperty("termsAndCoditions") boolean termsAndCoditions,
+                        @JsonProperty("email") String email,
+                        @JsonProperty("phone") String phone,
+                        @JsonProperty("attendance") Attendance attendance) {
         this.name = name;
+        this.biography = biography;
+        this.category = category;
+        this.speciality = speciality;
+        this.registerNumber = registerNumber;
+        this.healthInsurance = healthInsurance;
+        this.termsAndCoditions = termsAndCoditions;
+        this.email = email;
+        this.phone = phone;
+        this.attendance = attendance;
     }
 
     @JsonCreator
-    public Professional() {    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Professional() {
     }
 
 }

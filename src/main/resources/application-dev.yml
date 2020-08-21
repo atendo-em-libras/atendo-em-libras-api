@@ -2,6 +2,6 @@ spring:
   flyway:
     locations: classpath:/db/migrations
   datasource:
-    url: jdbc:postgresql://localhost:5432/atendo_em_libras
+    url: jdbc:postgresql://localhost:5432/atendo_em_libras_2
     username: postgres
     password: 123456
