@@ -70,4 +70,51 @@ public class Professional {
     public Professional() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public CategoryEnum getCategory() {
+        return category;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public String getRegisterNumber() {
+        return registerNumber;
+    }
+
+    public String getHealthInsurance() {
+        return healthInsurance;
+    }
+
+    public boolean isReferred() {
+        return isReferred;
+    }
+
+    public boolean isTermsAndCoditions() {
+        return termsAndCoditions;
+    }
+
+    public boolean isAdminApproved() {
+        return adminApproved;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
 }
