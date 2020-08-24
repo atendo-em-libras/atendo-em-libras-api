@@ -8,7 +8,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "attendances")
-public class Attendance {
+public class  Attendance {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;

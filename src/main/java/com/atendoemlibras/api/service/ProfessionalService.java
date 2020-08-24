@@ -16,7 +16,7 @@ public class ProfessionalService {
     }
 
     public List<Professional> getAll() {
-        return (List<Professional>) repository.findAll();
+        return repository.findAll();
     }
 
     public Optional<Professional> getOneProfessional(long index) {
