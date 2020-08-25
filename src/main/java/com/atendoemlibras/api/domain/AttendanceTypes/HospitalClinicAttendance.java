@@ -9,13 +9,13 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "hospital_attendances")
+@Table(name = "hospital_clinic_attendances")
 public class HospitalClinicAttendance {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "hospital_attendance")
+    @OneToOne(mappedBy = "hospitalClinicAttendance")
     private Attendance attendance;
 
     private String CEP;

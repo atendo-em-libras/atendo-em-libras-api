@@ -15,7 +15,7 @@ public class OnlineAttendance {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "online_attendance")
+    @OneToOne(mappedBy = "onlineAttendance")
     private Attendance attendance;
 
     @Column(name = "whats_app_number")

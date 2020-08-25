@@ -15,7 +15,7 @@ public class HouseholdAttendance {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "household_attendance")
+    @OneToOne(mappedBy = "householdAttendance")
     private Attendance attendance;
 
     private String state;
