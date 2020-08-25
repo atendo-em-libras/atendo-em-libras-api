@@ -18,7 +18,9 @@ public class HospitalClinicAttendance {
     @OneToOne(mappedBy = "hospitalClinicAttendance")
     private Attendance attendance;
 
+    @Column(name = "cep")
     private String CEP;
+
     private String state;
     private String stateInitials;
     private String city;

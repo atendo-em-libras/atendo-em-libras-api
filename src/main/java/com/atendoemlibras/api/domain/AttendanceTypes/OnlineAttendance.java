@@ -21,7 +21,7 @@ public class OnlineAttendance {
     @Column(name = "whats_app_number")
     private String whatsAppNumber;
 
-    @Column(name = "platfomrs")
+    @Column(name = "platforms")
     private String platforms;
 
     @JsonCreator
