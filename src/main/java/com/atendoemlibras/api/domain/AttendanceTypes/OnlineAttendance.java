@@ -35,4 +35,16 @@ public class OnlineAttendance {
     public OnlineAttendance() {
 
     }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public String getWhatsAppNumber() {
+        return whatsAppNumber;
+    }
+
+    public String getPlatforms() {
+        return platforms;
+    }
 }

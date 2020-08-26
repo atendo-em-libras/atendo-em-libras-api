@@ -65,4 +65,48 @@ public class HospitalClinicAttendance {
     public HospitalClinicAttendance(){
 
     }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public String getCEP() {
+        return CEP;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getStateInitials() {
+        return stateInitials;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
+    public String getComplementInfo() {
+        return complementInfo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

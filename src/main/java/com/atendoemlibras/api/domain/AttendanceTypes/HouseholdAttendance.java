@@ -35,4 +35,20 @@ public class HouseholdAttendance {
     public HouseholdAttendance() {
 
     }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
