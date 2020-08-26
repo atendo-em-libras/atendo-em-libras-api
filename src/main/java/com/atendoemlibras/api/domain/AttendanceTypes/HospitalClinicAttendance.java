@@ -66,10 +66,6 @@ public class HospitalClinicAttendance {
 
     }
 
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
     public String getCEP() {
         return CEP;
     }

@@ -36,10 +36,6 @@ public class HouseholdAttendance {
 
     }
 
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
     public String getState() {
         return state;
     }

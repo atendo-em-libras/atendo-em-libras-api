@@ -36,10 +36,6 @@ public class OnlineAttendance {
 
     }
 
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
     public String getWhatsAppNumber() {
         return whatsAppNumber;
     }

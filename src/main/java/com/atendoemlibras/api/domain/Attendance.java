@@ -45,4 +45,16 @@ public class  Attendance {
     public Attendance() {
 
     }
+
+    public OnlineAttendance getOnlineAttendance() {
+        return onlineAttendance;
+    }
+
+    public HospitalClinicAttendance getHospitalClinicAttendance() {
+        return hospitalClinicAttendance;
+    }
+
+    public HouseholdAttendance getHouseholdAttendance() {
+        return householdAttendance;
+    }
 }
