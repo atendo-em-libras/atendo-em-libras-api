@@ -9,7 +9,8 @@ public enum CategoryEnum {
     NUTRICAO("Nutrição"),
     ODONTOLOGIA("Odontologia"),
     PSICOLOGIA("Psicologia"),
-    TECNICO_ENFERMAGE("Técnico em enfermagem");
+    TECNICO_ENFERMAGEM("Técnico em enfermagem"),
+    OUTRO("Outra especialidade");
 
     private String value;
 
