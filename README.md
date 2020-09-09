@@ -22,7 +22,14 @@ Dentro do terminal do postgres, execute o comando:
 CREATE DATABASE atendo_em_libras OWNER postgres;
 ```
 
+(Opcional) Caso queira popular seu DB local com dados, rode o comando:
+
+```
+./gradlew loadSeedData
+```
+
 ## To start the API
+
 ```
 ./gradlew build
 ```
