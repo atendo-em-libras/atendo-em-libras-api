@@ -2,12 +2,8 @@ package com.atendoemlibras.api.controller;
 
 import com.atendoemlibras.api.domain.Professional;
 import com.atendoemlibras.api.service.ProfessionalService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.DataInput;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
