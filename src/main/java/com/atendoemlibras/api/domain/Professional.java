@@ -19,7 +19,7 @@ public class Professional {
     private String name;
     private String biography;
     private CategoryEnum category;
-    private String speciality;
+    private String specialty;
 
     @Column(name = "register_number")
     private String registerNumber;
@@ -44,20 +44,16 @@ public class Professional {
     private Attendance attendance;
 
     @JsonCreator
-    public Professional(@JsonProperty("name") String name,
-                        @JsonProperty("biography") String biography,
-                        @JsonProperty("category") CategoryEnum category,
-                        @JsonProperty("speciality") String speciality,
-                        @JsonProperty("registerNumber") String registerNumber,
-                        @JsonProperty("healthInsurance") String healthInsurance,
-                        @JsonProperty("termsAndCoditions") boolean termsAndCoditions,
-                        @JsonProperty("email") String email,
-                        @JsonProperty("phone") String phone,
-                        @JsonProperty("attendance") Attendance attendance) {
+    public Professional(@JsonProperty("name") String name, @JsonProperty("biography") String biography,
+            @JsonProperty("category") CategoryEnum category, @JsonProperty("specialty") String specialty,
+            @JsonProperty("registerNumber") String registerNumber,
+            @JsonProperty("healthInsurance") String healthInsurance,
+            @JsonProperty("termsAndCoditions") boolean termsAndCoditions, @JsonProperty("email") String email,
+            @JsonProperty("phone") String phone, @JsonProperty("attendance") Attendance attendance) {
         this.name = name;
         this.biography = biography;
         this.category = category;
-        this.speciality = speciality;
+        this.specialty = specialty;
         this.registerNumber = registerNumber;
         this.healthInsurance = healthInsurance;
         this.termsAndCoditions = termsAndCoditions;
@@ -86,8 +82,8 @@ public class Professional {
         return category;
     }
 
-    public String getSpeciality() {
-        return speciality;
+    public String getSpecialty() {
+        return specialty;
     }
 
     public String getRegisterNumber() {

@@ -223,7 +223,7 @@ on conflict do nothing;
 
 
 --- PROFESSIONALS
---- id | name | biography | category | speciality | register_number | health_insurance | is_referred | terms_and_conditions | admin_approved | email | phone | attendance_id
+--- id | name | biography | category | specialty | register_number | health_insurance | is_referred | terms_and_conditions | admin_approved | email | phone | attendance_id
 --- --+------+-----------+----------+------------+-----------------+------------------+-------------+----------------------+----------------+-------+-------+---------------
 
 insert into professionals
