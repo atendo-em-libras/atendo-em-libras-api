@@ -78,8 +78,8 @@ public class Professional {
         return biography;
     }
 
-    public CategoryEnum getCategory() {
-        return category;
+    public String getCategory() {
+        return CategoryEnum.valueOf(category);
     }
 
     public String getSpecialty() {
