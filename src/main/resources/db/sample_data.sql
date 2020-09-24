@@ -61,7 +61,8 @@ VALUES
     (12, 'Zoom', '(11) 99999-9999')
 ON conflict do nothing;
 
-
+SELECT pg_catalog.setval('online_attendances_id_seq', (SELECT MAX(id)
+    FROM online_attendances), true);
 
 --- HOUSEHOLD_ATTEANDANCES
 --- id | state | city | email
@@ -86,7 +87,8 @@ VALUES
     (4, 'Pernambuco', 'Recife', 'household_4@email.com')
 ON conflict do nothing;
 
-
+SELECT pg_catalog.setval('household_attendances_id_seq', (SELECT MAX(id)
+    FROM household_attendances), true);
 
 --- HOSPITAL_CLINIC_ATTENDANCES
 --- id | state | state_initials | city | street_name | street_number | complement_info | name | phone | email | cep
@@ -141,7 +143,8 @@ VALUES
     (10, 'Rio Grande do Sul', 'RS', 'Porto Alegre', 'R. Antônio Francisco da Rocha', 100, null, 'Hospital Parque Belém', '(51) 99999-9999', 'hospital_rs_belem@email.com', '00000-000')
 ON conflict do nothing;
 
-
+SELECT pg_catalog.setval('hospital_clinic_attendances_id_seq', (SELECT MAX(id)
+    FROM hospital_clinic_attendances), true);
 
 --- ATTENDANCES
 --- id | hospital_clinic_attendance_id | household_attendance_id | online_attendance_id
@@ -222,6 +225,9 @@ VALUES
 on conflict do nothing;
 
 
+SELECT pg_catalog.setval('attendances_id_seq', (SELECT MAX(id)
+    FROM attendances), true);
+
 --- PROFESSIONALS
 --- id | name | biography | category | specialty | register_number | health_insurance | is_referred | terms_and_conditions | admin_approved | email | phone | attendance_id
 --- --+------+-----------+----------+------------+-----------------+------------------+-------------+----------------------+----------------+-------+-------+---------------
@@ -301,3 +307,5 @@ values
     (15, 'Luana Gayer', 'Pediatra especializada em atender criaças super poderosas. Em meus anos de experiência atendi crianças famosas como as meninas super poderosas, o garoto de Esqueceram de Mim e a menina do filme Grinch.', 3, 'Pediatra', 'crp-xxxx', null, false, true, true, 'user15@email.com', '(51) 99999-9999', 15)
 on conflict do nothing;
 
+SELECT pg_catalog.setval('professionals_id_seq', (SELECT MAX(id)
+    FROM professionals), true);
