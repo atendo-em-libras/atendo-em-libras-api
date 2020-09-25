@@ -22,6 +22,8 @@ public class HospitalClinicAttendance {
     private String CEP;
 
     private String state;
+
+    @Column(name = "state_initials")
     private String stateInitials;
     private String city;
 

@@ -117,4 +117,8 @@ public class Professional {
     public Attendance getAttendance() {
         return attendance;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

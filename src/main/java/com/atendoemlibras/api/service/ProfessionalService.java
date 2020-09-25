@@ -31,4 +31,15 @@ public class ProfessionalService {
         repository.deleteById(index);
     }
 
+    public Optional<Professional> updateProfessional(long id, Professional professional) {
+        if(repository.findById(id).isPresent()){
+            professional.setId(id);
+
+            repository.save(professional);
+
+            return Optional.of(professional);
+        }
+
+        return Optional.empty();
+    }
 }

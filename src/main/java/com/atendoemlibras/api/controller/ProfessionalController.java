@@ -36,4 +36,9 @@ public class ProfessionalController {
     public void deleteProfessional(@PathVariable("index") int index) {
         service.deleteProfessional(index);
     }
+
+    @PutMapping(path = "/{id}")
+    public Optional<Professional> updateProfessional(@PathVariable("id") int id, @RequestBody Professional professional){
+        return service.updateProfessional(id, professional);
+    }
 }
