@@ -25,6 +25,7 @@ public class HospitalClinicAttendance {
 
     @Column(name = "state_initials")
     private String stateInitials;
+
     private String city;
 
     @Column(name = "street_name")

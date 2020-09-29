@@ -2,6 +2,7 @@ package com.atendoemlibras.api.controller;
 
 import com.atendoemlibras.api.domain.Professional;
 import com.atendoemlibras.api.service.ProfessionalService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -12,6 +13,9 @@ import java.util.Optional;
 @RequestMapping("/professionals")
 public class ProfessionalController {
     private ProfessionalService service;
+
+    @Value("${spring.token.value}")
+    private String profileToken;
 
     public ProfessionalController(ProfessionalService service) {
         this.service = service;
@@ -32,13 +36,18 @@ public class ProfessionalController {
         service.addProfessional(professional);
     }
 
-    @DeleteMapping(path = "/{index}")
-    public void deleteProfessional(@PathVariable("index") int index) {
-        service.deleteProfessional(index);
+    @DeleteMapping(path = "/{id}/{token}")
+    public void deleteProfessional(@PathVariable("id") int id, @PathVariable("token") String token) {
+        if(token.equals(profileToken)){
+            service.deleteProfessional(id);
+        }
     }
 
-    @PutMapping(path = "/{id}")
-    public Optional<Professional> updateProfessional(@PathVariable("id") int id, @RequestBody Professional professional){
-        return service.updateProfessional(id, professional);
+    @PutMapping(path = "/{id}/{token}")
+    public Optional<Professional> updateProfessional(@PathVariable("id") int id, @PathVariable("token") String token, @RequestBody Professional professional){
+        if(token.equals(profileToken)){
+            return service.updateProfessional(id, professional);
+        }
+        return Optional.empty();
     }
 }
