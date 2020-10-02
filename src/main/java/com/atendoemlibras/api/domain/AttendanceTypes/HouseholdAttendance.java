@@ -19,14 +19,20 @@ public class HouseholdAttendance {
     private Attendance attendance;
 
     private String state;
+
+    @Column(name = "state_initials")
+    private String stateInitials;
+
     private String city;
     private String email;
 
     @JsonCreator
     public HouseholdAttendance(@JsonProperty("state") String state,
+                               @JsonProperty("stateInitials") String stateInitials,
                                @JsonProperty("city") String city,
                                @JsonProperty("email") String email) {
         this.state = state;
+        this.stateInitials = stateInitials;
         this.city = city;
         this.email = email;
     }
@@ -38,6 +44,10 @@ public class HouseholdAttendance {
 
     public String getState() {
         return state;
+    }
+
+    public String getStateInitials() {
+        return stateInitials;
     }
 
     public String getCity() {
