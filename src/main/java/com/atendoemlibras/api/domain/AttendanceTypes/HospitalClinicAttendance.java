@@ -27,6 +27,7 @@ public class HospitalClinicAttendance {
     private String stateInitials;
 
     private String city;
+    private String neighborhood;
 
     @Column(name = "street_name")
     private String streetName;
@@ -46,6 +47,7 @@ public class HospitalClinicAttendance {
                                     @JsonProperty("state") String state,
                                     @JsonProperty("stateInitials") String stateInitials,
                                     @JsonProperty("city") String city,
+                                    @JsonProperty("neighborhood") String neighborhood,
                                     @JsonProperty("streetName") String streetName,
                                     @JsonProperty("streetNumber") String streetNumber,
                                     @JsonProperty("complementInfo") String complementInfo,
@@ -56,6 +58,7 @@ public class HospitalClinicAttendance {
         this.state = state;
         this.stateInitials = stateInitials;
         this.city = city;
+        this.neighborhood = neighborhood;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.complementInfo = complementInfo;
@@ -65,7 +68,7 @@ public class HospitalClinicAttendance {
     }
 
     @JsonCreator
-    public HospitalClinicAttendance(){
+    public HospitalClinicAttendance() {
 
     }
 
@@ -83,6 +86,10 @@ public class HospitalClinicAttendance {
 
     public String getCity() {
         return city;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
     }
 
     public String getStreetName() {
