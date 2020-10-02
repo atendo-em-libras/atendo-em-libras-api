@@ -24,11 +24,16 @@ public class OnlineAttendance {
     @Column(name = "platforms")
     private String platforms;
 
+    @Column(name = "has_online_attendance")
+    private boolean hasOnlineAttendance;
+
     @JsonCreator
     public OnlineAttendance(@JsonProperty("whatsAppNumber") String whatsAppNumber,
-                            @JsonProperty("platforms") String platforms) {
+                            @JsonProperty("platforms") String platforms,
+                            @JsonProperty("hasOnlineAttendance") boolean hasOnlineAttendance) {
         this.whatsAppNumber = whatsAppNumber;
         this.platforms = platforms;
+        this.hasOnlineAttendance = hasOnlineAttendance;
     }
 
     @JsonCreator
@@ -42,5 +47,9 @@ public class OnlineAttendance {
 
     public String getPlatforms() {
         return platforms;
+    }
+
+    public boolean getHasOnlineAttendance() {
+        return hasOnlineAttendance;
     }
 }
