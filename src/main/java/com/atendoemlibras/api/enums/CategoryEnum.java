@@ -5,9 +5,15 @@ import java.util.Map;
 
 public enum CategoryEnum {
 
-    ENFERMAGEM("Enfermagem"), FISIOTERAPIA("Fisioterapia"), FONOAUDIOLOGIA("Fonoaudiologia"), MEDICINA("Medicina"),
-    NUTRICAO("Nutrição"), ODONTOLOGIA("Odontologia"), PSICOLOGIA("Psicologia"),
-    TECNICO_ENFERMAGEM("Técnico em enfermagem"), OUTRO("Outra especialidade");
+    ENFERMAGEM("Enfermagem"),
+    FISIOTERAPIA("Fisioterapia"),
+    FONOAUDIOLOGIA("Fonoaudiologia"),
+    MEDICINA("Medicina"),
+    NUTRICAO("Nutrição"),
+    ODONTOLOGIA("Odontologia"),
+    PSICOLOGIA("Psicologia"),
+    TECNICO_ENFERMAGEM("Técnico em enfermagem"),
+    OUTRO("Outra especialidade");
 
     private String label;
 
