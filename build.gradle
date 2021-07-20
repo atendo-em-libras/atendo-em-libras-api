@@ -36,10 +36,12 @@ dependencies {
     compile "io.springfox:springfox-swagger2:2.9.2"
     compile "io.springfox:springfox-swagger-ui:2.9.2"
 
-    testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:2.21.0"
-
     developmentOnly "org.springframework.boot:spring-boot-devtools:$springBootVersion"
+    
+    testCompile "org.mockito:mockito-core:2.21.0"
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.7.2')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.7.2')
+    
 }
 
 repositories {
@@ -55,4 +57,8 @@ bootRun {
 task loadSeedData(type: Exec) {
   workingDir 'src/main/resources/db'
   commandLine 'sh', './load_sql_file.sh', 'sample_data.sql'
+}
+
+test {
+    useJUnitPlatform()
 }
