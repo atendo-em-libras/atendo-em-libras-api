@@ -14,6 +14,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.7.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'jacoco'
     id "org.flywaydb.flyway" version "6.5.3"
 }
 
@@ -60,4 +61,9 @@ task loadSeedData(type: Exec) {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
 }
