@@ -15,7 +15,7 @@ public class SwaggerConfig {
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.atendoemlibras.api"))
                 .paths(PathSelectors.any())
                 .build();
     }
