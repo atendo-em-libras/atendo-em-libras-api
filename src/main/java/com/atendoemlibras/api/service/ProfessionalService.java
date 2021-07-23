@@ -23,8 +23,9 @@ public class ProfessionalService {
         return repository.findById(index);
     }
 
-    public void addProfessional(Professional professional) {
-        repository.save(professional);
+    public Long addProfessional(Professional professional) {
+        var response = repository.save(professional);
+        return response.getId();
     }
 
     public void deleteProfessional (long index) {
