@@ -1,17 +1,22 @@
 package com.atendoemlibras.api.controller;
 
-import com.atendoemlibras.api.domain.Professional;
-import com.atendoemlibras.api.service.ProfessionalService;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.atendoemlibras.api.domain.Professional;
+import com.atendoemlibras.api.service.ProfessionalService;
 
 @RestController
 @RequestMapping("/professionals")
@@ -30,15 +35,10 @@ public class ProfessionalController {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping(path = "/{index}")
-    public ResponseEntity<Professional> getOneProfessional(@PathVariable("index") int index) {
-        var response = service.getOneProfessional(index);
-
-        if(response.isPresent()){
-            return ResponseEntity.ok(response.get());
-        }
-
-        return ResponseEntity.notFound().build();
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Professional> getOneProfessional(@PathVariable Long id) {
+        var response = service.getProfessionalById(id);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping(path = "/")
@@ -51,17 +51,17 @@ public class ProfessionalController {
     }
 
     @DeleteMapping(path = "/{id}/{token}")
-    public void deleteProfessional(@PathVariable("id") int id, @PathVariable("token") String token) {
-        if(token.equals(profileToken)){
-            service.deleteProfessional(id);
-        }
+    public ResponseEntity<Void> deleteProfessional(@PathVariable("id") int id, @PathVariable("token") String token) {
+        service.deleteProfessional(id, token);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(path = "/{id}/{token}")
-    public Optional<Professional> updateProfessional(@PathVariable("id") int id, @PathVariable("token") String token, @RequestBody Professional professional){
-        if(token.equals(profileToken)){
-            return service.updateProfessional(id, professional);
-        }
-        return Optional.empty();
+    public ResponseEntity<Professional> updateProfessional(@PathVariable("id") int id,
+                                                           @PathVariable("token") String token,
+                                                           @RequestBody Professional professional){
+
+        var response = service.updateProfessional(id, token, professional);
+        return ResponseEntity.ok(response);
     }
 }
