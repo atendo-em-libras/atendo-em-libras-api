@@ -59,6 +59,11 @@ task loadSeedData(type: Exec) {
   commandLine 'sh', './load_sql_file.sh', 'sample_data.sql'
 }
 
+task loadSeedDataDocker(type: Exec) {
+    workingDir 'src/main/resources/db'
+    commandLine 'sh', './load_sql_file_docker.sh', 'sample_data.sql'
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport

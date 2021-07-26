@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  flyway:
+    image: flyway/flyway
+    command: -configFiles=/flyway/conf/flyway.config -locations=filesystem:/flyway/sql -connectRetries=60 migrate
+    volumes:
+      - ${PWD}/../src/main/resources/db/migrations:/flyway/sql
+      - ${PWD}/flyway.config:/flyway/conf/flyway.config
+    depends_on:
+      - db
+  db:
+    image: postgres
+    container_name: atendo_em_libras
+    environment:
+      POSTGRES_PASSWORD: '123456'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'atendo_em_libras'
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    volumes:
+      - ../src/main/resources/db/sample_data.sql:/sample_data.sql
