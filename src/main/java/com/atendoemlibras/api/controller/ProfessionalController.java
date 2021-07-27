@@ -41,12 +41,12 @@ public class ProfessionalController {
     }
 
     @PostMapping(path = "/")
-    public ResponseEntity<Long> addProfessional(@RequestBody Professional professional, UriComponentsBuilder uriBuilder) {
-        var idProfessional = service.addProfessional(professional);
+    public ResponseEntity<Professional> addProfessional(@RequestBody Professional professional, UriComponentsBuilder uriBuilder) {
+        var response = service.addProfessional(professional);
 
-        var uri = uriBuilder.path("/professionals/{id}").buildAndExpand(idProfessional).toUri();
+        var uri = uriBuilder.path("/professionals/{id}").buildAndExpand(response.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(idProfessional);
+        return ResponseEntity.created(uri).body(response);
     }
 
     @DeleteMapping(path = "/{id}/{token}")

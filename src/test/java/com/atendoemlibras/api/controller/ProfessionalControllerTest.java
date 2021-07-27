@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 import com.atendoemlibras.api.domain.Professional;
 import com.atendoemlibras.api.exceptions.ProfessionalNotFoundException;
 import com.atendoemlibras.api.service.ProfessionalService;
+import com.atendoemlibras.api.utils.ProfessionalMockUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -15,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class ProfessionalControllerTest {
@@ -38,10 +38,7 @@ class ProfessionalControllerTest {
 
 	@Test
 	void shouldReturnProfessionalsWithSuccess() {
-		var professionalOne = getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
-		var professionalTwo = getProfessionalFromMock(2L, "maria",  "maria@teste.com.br");
-
-		List<Professional> professionals = Arrays.asList(professionalOne, professionalTwo);
+		List<Professional> professionals = ProfessionalMockUtils.getMockProfessionals();
 		when(professionalService.getAll()).thenReturn(professionals);
 
 		var response = professionalController.getAll();
@@ -65,7 +62,7 @@ class ProfessionalControllerTest {
 
 	@Test
 	void shouldReturnOkProfessionalById() {
-		var professional = getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
+		var professional = ProfessionalMockUtils.getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
 		when(professionalService.getProfessionalById(1L)).thenReturn(professional);
 
 		var response = professionalController.getOneProfessional(1L);
@@ -82,17 +79,21 @@ class ProfessionalControllerTest {
 
 	@Test
 	void shouldReturnCreatedOnProfessionalRegistration() {
-		var professional = getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
-		when(professionalService.addProfessional(professional)).thenReturn(1L);
+		var professional = ProfessionalMockUtils.getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
+		when(professionalService.addProfessional(professional)).thenReturn(professional);
 
 		var response = professionalController.addProfessional(professional, uriBuilder);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertEquals(professional.getId(), response.getBody());
+
+		var professionalResponse = response.getBody();
+		assertEquals(professional.getId(), professionalResponse.getId());
+		assertEquals(professional.getName(), professionalResponse.getName());
+		assertEquals(professional.getEmail(), professionalResponse.getEmail());
 	}
 
 	@Test
 	void shouldUpdateProfessionalWithSuccess() {
-		var professional = getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
+		var professional = ProfessionalMockUtils.getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
 		when(professionalService.updateProfessional(1L, TOKEN, professional)).thenReturn(professional);
 
 		var response = professionalController.updateProfessional(1L, TOKEN, professional);
@@ -105,13 +106,5 @@ class ProfessionalControllerTest {
 		doNothing().when(professionalService).deleteProfessional(anyLong(), anyString());
 		var response = professionalController.deleteProfessional(1L, TOKEN);
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-	}
-
-	private Professional getProfessionalFromMock(Long id, String name, String email) {
-		var professional = new Professional();
-		professional.setId(id);
-		professional.setName(name);
-		professional.setEmail(email);
-		return professional;
 	}
 }
