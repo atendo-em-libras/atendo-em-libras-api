@@ -2,26 +2,25 @@ package com.atendoemlibras.api.service;
 
 import com.atendoemlibras.api.domain.Professional;
 import com.atendoemlibras.api.exceptions.ProfessionalNotFoundException;
-import com.atendoemlibras.api.exceptions.TokenIsNotValidException;
 import com.atendoemlibras.api.repository.ProfessionalRepository;
-import com.atendoemlibras.api.utils.TokenValidationUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProfessionalService {
 
     private ProfessionalRepository repository;
 
+    private TokenValidationService tokenValidationUtils;
+
     private static final String PROFESSIONAL_WITH_ID_NOT_EXISTS = "Professional com id %s não existe.";
 
     private static final String TOKEN_IS_NOT_VALID = "Token não é válido";
 
-    public ProfessionalService(ProfessionalRepository repository) {
+    public ProfessionalService(ProfessionalRepository repository, TokenValidationService tokenValidationUtils) {
         this.repository = repository;
+        this.tokenValidationUtils = tokenValidationUtils;
     }
 
     public List<Professional> getAll() {
@@ -33,23 +32,26 @@ public class ProfessionalService {
         return response.getId();
     }
 
-    public void deleteProfessional (long id, String token) {
-        if(TokenValidationUtils.isValidToken(token)) {
-            var professionalFound = getProfessionalById(id);
-            repository.delete(professionalFound);
-        }
+    public void deleteProfessional (Long id, String token) {
+        tokenValidationUtils.executeIfHasValidToken( token,
+            () -> {
+                var professionalFound = getProfessionalById(id);
+                repository.delete(professionalFound);
+
+                return null;
+            });
     }
 
-    public Professional updateProfessional(long id, String token, Professional professional) {
-        if(TokenValidationUtils.isValidToken(token)) {
-            var professionalFound = getProfessionalById(id);
-            professionalFound.setId(id);
+    public Professional updateProfessional(Long id, String token, Professional professional) {
+        return tokenValidationUtils.executeIfHasValidToken(token,
+            () -> {
+                var foundProfessional = getProfessionalById(id);
 
-            var response = repository.save(professional);
-            return response;
-        }
+                professional.setId(foundProfessional.getId());
 
-        throw new TokenIsNotValidException(TOKEN_IS_NOT_VALID);
+                var response = repository.save(professional);
+                return response;
+            });
     }
 
     public Professional getProfessionalById(Long id) {

@@ -17,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 class ProfessionalControllerTest {
 
@@ -96,7 +95,7 @@ class ProfessionalControllerTest {
 		var professional = getProfessionalFromMock(1L, "carol",  "carol@teste.com.br");
 		when(professionalService.updateProfessional(1L, TOKEN, professional)).thenReturn(professional);
 
-		var response = professionalController.updateProfessional(1, TOKEN, professional);
+		var response = professionalController.updateProfessional(1L, TOKEN, professional);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(professional.getId(), response.getBody().getId());
 	}
@@ -104,7 +103,7 @@ class ProfessionalControllerTest {
 	@Test
 	void shouldDeleteProfessionalWithSuccess() {
 		doNothing().when(professionalService).deleteProfessional(anyLong(), anyString());
-		var response = professionalController.deleteProfessional(1, TOKEN);
+		var response = professionalController.deleteProfessional(1L, TOKEN);
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 	}
 

@@ -1,7 +1,6 @@
 package com.atendoemlibras.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -51,14 +50,14 @@ public class ProfessionalController {
     }
 
     @DeleteMapping(path = "/{id}/{token}")
-    public ResponseEntity<Void> deleteProfessional(@PathVariable("id") int id, @PathVariable("token") String token) {
+    public ResponseEntity<Void> deleteProfessional(@PathVariable Long id, @PathVariable String token) {
         service.deleteProfessional(id, token);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(path = "/{id}/{token}")
-    public ResponseEntity<Professional> updateProfessional(@PathVariable("id") int id,
-                                                           @PathVariable("token") String token,
+    public ResponseEntity<Professional> updateProfessional(@PathVariable Long id,
+                                                           @PathVariable String token,
                                                            @RequestBody Professional professional){
 
         var response = service.updateProfessional(id, token, professional);
