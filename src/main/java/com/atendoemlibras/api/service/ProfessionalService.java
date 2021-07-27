@@ -27,9 +27,8 @@ public class ProfessionalService {
         return repository.findAll();
     }
 
-    public Long addProfessional(Professional professional) {
-        var response = repository.save(professional);
-        return response.getId();
+    public Professional addProfessional(Professional professional) {
+        return repository.save(professional);
     }
 
     public void deleteProfessional (Long id, String token) {
