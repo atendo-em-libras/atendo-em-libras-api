@@ -2,6 +2,7 @@ package com.atendoemlibras.api.service;
 
 import com.atendoemlibras.api.domain.Professional;
 import com.atendoemlibras.api.exceptions.ProfessionalNotFoundException;
+import com.atendoemlibras.api.exceptions.TokenIsNotValidException;
 import com.atendoemlibras.api.repository.ProfessionalRepository;
 import com.atendoemlibras.api.utils.ProfessionalMockUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -106,6 +107,32 @@ class ProfessionalServiceTest {
     }
 
     @Test
+    void shouldDeleteProfessionalNotFound() {
+        when(tokenValidationService.executeIfHasValidToken(anyString(), any())).then(invocation -> {
+            return invocation.getArgument(1, Supplier.class).get();
+        });
+
+        when(repository.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(ProfessionalNotFoundException.class, () -> professionalService.deleteProfessional(1L, "devtoken"));
+
+        verify(tokenValidationService).executeIfHasValidToken(anyString(), any());
+        verify(repository, never()).delete(any());
+    }
+
+    @Test
+    void shouldNotDeleteProfessionalTokenIsNotValidException() {
+        when(tokenValidationService.executeIfHasValidToken(anyString(), any())).then(invocation -> {
+            throw new TokenIsNotValidException("Token nao valido");
+        });
+
+        assertThrows(TokenIsNotValidException.class, () -> professionalService.deleteProfessional(1L, "devtoken"));
+
+        verify(tokenValidationService).executeIfHasValidToken(anyString(), any());
+        verify(repository, never()).findById(any());
+        verify(repository, never()).delete(any());
+    }
+
+    @Test
     void shouldUpdateProfessionalById() {
         var professional = ProfessionalMockUtils.getProfessionalFromMock(1L, "Jose", "ze@gmail.com");
 
@@ -121,6 +148,36 @@ class ProfessionalServiceTest {
         assertEquals(professional.getId(), response.getId());
         assertEquals(professional.getName(), response.getName());
         assertEquals(professional.getEmail(), response.getEmail());
+    }
+
+    @Test
+    void shouldUpdateProfessionalNotFound() {
+        var professional = ProfessionalMockUtils.getProfessionalFromMock();
+
+        when(tokenValidationService.executeIfHasValidToken(anyString(), any())).then(invocation -> {
+            return invocation.getArgument(1, Supplier.class).get();
+        });
+
+        when(repository.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(ProfessionalNotFoundException.class, () -> professionalService.updateProfessional(1L, "devtoken", professional));
+
+        verify(tokenValidationService).executeIfHasValidToken(anyString(), any());
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void shouldNotUpdateProfessionalTokenIsNotValidException() {
+        var professional = ProfessionalMockUtils.getProfessionalFromMock();
+
+        when(tokenValidationService.executeIfHasValidToken(anyString(), any())).then(invocation -> {
+            throw new TokenIsNotValidException("Token nao valido");
+        });
+
+        assertThrows(TokenIsNotValidException.class, () -> professionalService.updateProfessional(1L, "devtoken", professional));
+
+        verify(tokenValidationService).executeIfHasValidToken(anyString(), any());
+        verify(repository, never()).findById(any());
+        verify(repository, never()).save(any());
     }
 
 }
