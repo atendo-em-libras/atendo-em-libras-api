@@ -1,6 +1,7 @@
 package com.atendoemlibras.api.service;
 
 import com.atendoemlibras.api.domain.Professional;
+import com.atendoemlibras.api.exceptions.ProfessionalNotFoundException;
 import com.atendoemlibras.api.repository.ProfessionalRepository;
 import com.atendoemlibras.api.utils.ProfessionalMockUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,11 +10,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 class ProfessionalServiceTest {
 
@@ -63,6 +65,60 @@ class ProfessionalServiceTest {
 
         var response = professionalService.addProfessional(professional);
         assertEquals(1L, response.getId());
+        assertEquals(professional.getName(), response.getName());
+        assertEquals(professional.getEmail(), response.getEmail());
+    }
+
+    @Test
+    void shouldReturnProfessionalById() {
+        var professional = ProfessionalMockUtils.getProfessionalFromMock(1L, "Jose", "ze@gmail.com");
+
+        when(repository.findById(anyLong())).thenReturn(Optional.of(professional));
+
+        var response = professionalService.getProfessionalById(1L);
+        assertEquals(professional.getId(), response.getId());
+        assertEquals(professional.getName(), response.getName());
+        assertEquals(professional.getEmail(), response.getEmail());
+    }
+
+    @Test
+    void shouldThrowProfessionalNotFoundException() {
+        when(repository.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(ProfessionalNotFoundException.class, () -> professionalService.getProfessionalById(1L));
+    }
+
+    @Test
+    void shouldDeleteProfessionalById() {
+        var professional = ProfessionalMockUtils.getProfessionalFromMock(1L, "Jose", "ze@gmail.com");
+
+        when(tokenValidationService.executeIfHasValidToken(anyString(), any())).then(invocation -> {
+            return invocation.getArgument(1, Supplier.class).get();
+        });
+
+        when(repository.findById(anyLong())).thenReturn(Optional.of(professional));
+
+        doNothing().when(repository).delete(any());
+
+        professionalService.deleteProfessional(1L, "devtoken");
+
+        verify(repository).findById(anyLong());
+        verify(repository).delete(any());
+    }
+
+    @Test
+    void shouldUpdateProfessionalById() {
+        var professional = ProfessionalMockUtils.getProfessionalFromMock(1L, "Jose", "ze@gmail.com");
+
+        when(tokenValidationService.executeIfHasValidToken(anyString(), any())).then(invocation -> {
+            return invocation.getArgument(1, Supplier.class).get();
+        });
+
+        when(repository.findById(anyLong())).thenReturn(Optional.of(professional));
+
+        when(repository.save(any())).thenReturn(professional);
+
+        var response = professionalService.updateProfessional(1L, "devtoken", professional);
+        assertEquals(professional.getId(), response.getId());
         assertEquals(professional.getName(), response.getName());
         assertEquals(professional.getEmail(), response.getEmail());
     }
