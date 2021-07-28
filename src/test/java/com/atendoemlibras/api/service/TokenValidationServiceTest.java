@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TokenValidationServiceTest {
 
-    @InjectMocks
     private TokenValidationService tokenValidationService;
 
     private String token;
