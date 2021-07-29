@@ -16,8 +16,6 @@ public class ProfessionalService {
 
     private static final String PROFESSIONAL_WITH_ID_NOT_EXISTS = "Professional com id %s não existe.";
 
-    private static final String TOKEN_IS_NOT_VALID = "Token não é válido";
-
     public ProfessionalService(ProfessionalRepository repository, TokenValidationService tokenValidationUtils) {
         this.repository = repository;
         this.tokenValidationUtils = tokenValidationUtils;

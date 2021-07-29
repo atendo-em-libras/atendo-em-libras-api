@@ -22,9 +22,6 @@ import com.atendoemlibras.api.service.ProfessionalService;
 public class ProfessionalController {
     private ProfessionalService service;
 
-    @Value("${spring.token.value}")
-    private String profileToken;
-
     public ProfessionalController(ProfessionalService service) {
         this.service = service;
     }
