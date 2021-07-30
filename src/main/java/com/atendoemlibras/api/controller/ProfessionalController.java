@@ -17,6 +17,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.atendoemlibras.api.domain.Professional;
 import com.atendoemlibras.api.service.ProfessionalService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/professionals")
 public class ProfessionalController {
@@ -38,7 +40,7 @@ public class ProfessionalController {
     }
 
     @PostMapping(path = "/")
-    public ResponseEntity<Professional> addProfessional(@RequestBody Professional professional, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Professional> addProfessional(@Valid @RequestBody Professional professional, UriComponentsBuilder uriBuilder) {
         var response = service.addProfessional(professional);
 
         var uri = uriBuilder.path("/professionals/{id}").buildAndExpand(response.getId()).toUri();
@@ -55,7 +57,7 @@ public class ProfessionalController {
     @PutMapping(path = "/{id}/{token}")
     public ResponseEntity<Professional> updateProfessional(@PathVariable Long id,
                                                            @PathVariable String token,
-                                                           @RequestBody Professional professional){
+                                                           @Valid @RequestBody Professional professional){
 
         var response = service.updateProfessional(id, token, professional);
         return ResponseEntity.ok(response);

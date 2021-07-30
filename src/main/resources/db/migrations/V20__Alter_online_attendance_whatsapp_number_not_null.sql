@@ -1,0 +1,1 @@
+ALTER TABLE online_attendances ALTER COLUMN whats_app_number SET NOT NULL;

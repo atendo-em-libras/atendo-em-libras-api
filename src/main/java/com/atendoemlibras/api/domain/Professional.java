@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -16,9 +18,23 @@ public class Professional {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @NotNull(message = "O nome do profissional é obrigatório")
+    @Size(min = 1, max = 255, message = "O nome do profissional deve ter entre 1 e 255 caracteres")
     private String name;
-    private String biography;
+
+    @NotNull(message = "A categoria do profissional deve ser obrigatória")
     private CategoryEnum category;
+
+    @NotNull(message = "O email do profissional é obrigatório")
+    @Size(min = 1, max = 255, message = "O email do profissional deve ter entre 1 e 255 caracteres")
+    private String email;
+
+    @NotNull(message = "O telefone do profissional é obrigatório")
+    @Size(min = 1, max = 255, message = "O nome do profissional deve ter entre 1 e 255 caracteres")
+    private String phone;
+
+    private String biography;
+
     private String specialty;
 
     @Column(name = "register_number")
@@ -35,9 +51,6 @@ public class Professional {
 
     @Column(name = "admin_approved")
     private boolean adminApproved;
-
-    private String email;
-    private String phone;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "attendance_id", referencedColumnName = "id")
