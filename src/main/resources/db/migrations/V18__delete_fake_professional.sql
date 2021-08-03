@@ -1,1 +1,1 @@
-DELETE FROM professionals;
+DELETE FROM professionals WHERE id = 1;
