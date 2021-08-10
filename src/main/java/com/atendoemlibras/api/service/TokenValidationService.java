@@ -14,6 +14,9 @@ public class TokenValidationService {
 
     private static final String TOKEN_IS_NOT_VALID = "Token não é válido";
 
+    public TokenValidationService() {
+    }
+
     public TokenValidationService(String profileToken) {
         this.profileToken = profileToken;
     }

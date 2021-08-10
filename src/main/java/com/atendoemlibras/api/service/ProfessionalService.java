@@ -3,8 +3,13 @@ package com.atendoemlibras.api.service;
 import com.atendoemlibras.api.domain.Professional;
 import com.atendoemlibras.api.exceptions.ProfessionalNotFoundException;
 import com.atendoemlibras.api.repository.ProfessionalRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +32,18 @@ public class ProfessionalService {
 
     public Professional addProfessional(Professional professional) {
         return repository.save(professional);
+    }
+
+    public List<Professional> getProfessionalsPaginated(Integer pageNumber, Integer pageSize, String sortBy) {
+        var paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
+
+        var pagedResult = repository.findAll(paging);
+
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public void deleteProfessional (Long id, String token) {
